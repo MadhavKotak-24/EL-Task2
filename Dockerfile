@@ -1,13 +1,8 @@
-FROM node:20-alpine
+FROM jenkins/jenkins:lts
 
-WORKDIR /app
+USER root
 
-COPY package*.json ./
+RUN apt-get update && \
+    apt-get install -y docker.io
 
-RUN npm install
-
-COPY . .
-
-EXPOSE 3000
-
-CMD ["npm","start"]
+USER jenkins
